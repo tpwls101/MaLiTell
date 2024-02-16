@@ -25,6 +25,7 @@ import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserServ
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -43,7 +44,7 @@ public class SecurityConfig {
     private final UserRepository userRepository;
     private final StompHandler stompHandler;
 
-    private String defaultFilterProcessesUrl = "/api/login";
+//    private String defaultFilterProcessesUrl = "/api/login";
 
     // AuthenticationManager 등록
     @Bean
@@ -87,8 +88,8 @@ public class SecurityConfig {
         // 커스텀 필터 등록
         // (생성한 커스텀 필터, 필터를 넣을 위치)
         // /api/login 처리
-        http.addFilterAt(this.abstractAuthenticationProcessingFilter(authenticationManager(authenticationConfiguration)), LoginFilter.class);
-        http.addFilterAt(new LoginFilter(defaultFilterProcessesUrl, authenticationManager(authenticationConfiguration), jwtUtil, userRepository), LoginFilter.class);
+//        http.addFilterAt(this.abstractAuthenticationProcessingFilter(authenticationManager(authenticationConfiguration)), LoginFilter.class);
+        http.addFilterAt(new LoginFilter("/api/login", authenticationManager(authenticationConfiguration), jwtUtil, userRepository), UsernamePasswordAuthenticationFilter.class);
 
         // 세션 설정 (가장 중요!)
         // JWT 방식에서는 세션을 항상 stateless 상태로 유지함
@@ -97,14 +98,14 @@ public class SecurityConfig {
         return http.build();
     }
 
-    public AbstractAuthenticationProcessingFilter abstractAuthenticationProcessingFilter(final AuthenticationManager authenticationManager) {
-        return new LoginFilter(
-                defaultFilterProcessesUrl,
-                authenticationManager,
-                jwtUtil,
-                userRepository
-        );
-    }
+//    public AbstractAuthenticationProcessingFilter abstractAuthenticationProcessingFilter(final AuthenticationManager authenticationManager) {
+//        return new LoginFilter(
+//                defaultFilterProcessesUrl,
+//                authenticationManager,
+//                jwtUtil,
+//                userRepository
+//        );
+//    }
 
     @Bean
     protected CorsConfigurationSource corsConfigurationSource() {

@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
@@ -28,15 +29,16 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
-    private final String defaultFilterProcessesUrl;
+//    private final String defaultFilterProcessesUrl;
 
     private final UserRepository userRepository;
 
-    public LoginFilter(final String defaultFilterProcessesUrl, AuthenticationManager authenticationManager, JWTUtil jwtUtil, UserRepository userRepository) {
-        this.defaultFilterProcessesUrl = defaultFilterProcessesUrl;
+    public LoginFilter(String defaultFilterProcessesUrl, AuthenticationManager authenticationManager, JWTUtil jwtUtil, UserRepository userRepository) {
+//        this.defaultFilterProcessesUrl = defaultFilterProcessesUrl;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
+        super.setFilterProcessesUrl(defaultFilterProcessesUrl);
     }
 
     @Override
