@@ -31,7 +31,7 @@ export const authApi: AxiosInstance = axios.create({
   baseURL: BASE_URL + "/api",
   headers: {
     "Content-type": "application/json",
-    "Access_Token": sessionStorage.getItem("Access_Token");
+    "Access_Token": sessionStorage.getItem("Access_Token"),
   },
 });
 
