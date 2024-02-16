@@ -47,4 +47,7 @@ export const Button = styled.button`
   padding: 10px;
   font-size: 15px;
   border-radius: 10px;
+  &:disabled {
+    color: gray;
+  }
 `

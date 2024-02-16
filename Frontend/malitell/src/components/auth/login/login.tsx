@@ -33,7 +33,7 @@ export default function Login({ handleLogin, handleBack }: NavProps) {
   };
 
   const loginKakao = (e: React.MouseEvent): void => {
-    fetch(`http://localhost:8080/auth/oauth2/kakao`, {
+    fetch(`https://i10c208.p.ssafy.io/auth/oauth2/kakao`, {
       method: "POST",
     })
   };

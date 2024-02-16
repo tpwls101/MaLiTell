@@ -78,8 +78,8 @@ export const joinSHGroup = (gatheringSeq: number) => {
   const formData = new FormData();
   formData.append("gatheringSeq", gatheringSeq.toString());
 
+  // const res = axios.post("https://i10c208.p.ssafy.io/api/selfHelpGroup/participate", formData, {
   const res = axios.post("https://i10c208.p.ssafy.io/api/selfHelpGroup/participate", formData, {
-  // const res = axios.post("http://localhost:8080/api/selfHelpGroup/participate", formData, {
         headers: {
           Access_Token: sessionStorage.getItem("Access_Token"),
           "Content-Type": "multipart/form-data",
