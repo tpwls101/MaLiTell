@@ -32,7 +32,10 @@ export const login = (data: loginData) => {
       .then((res) => {
         sessionStorage.setItem("Access_Token", res.headers.access_token);
         sessionStorage.setItem("Refresh_Token", res.headers.refresh_token);
-        dispatch(saveUserInfo(res.data));
+
+        setTimeout(() => {
+          dispatch(saveUserInfo(res.data));
+        }, 6000);
       })
       .then(() => {
         return fetchUserInfo();

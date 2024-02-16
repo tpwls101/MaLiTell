@@ -31,7 +31,7 @@ export const authApi: AxiosInstance = axios.create({
   baseURL: BASE_URL + "/api",
   headers: {
     "Content-type": "application/json",
-    "Access_Token": sessionStorage.getItem("Access_Token"),
+    Access_Token: sessionStorage.getItem("Access_Token"),
   },
 });
 
@@ -48,17 +48,20 @@ export const refreshApi: AxiosInstance = axios.create({
   headers: {
     "Content-type": "application/json",
   },
-  
 });
 
 const refreshAccessToken = () => {
   const res = refreshApi
-    .post("/user/reissue", null, { headers: {
-      "Refresh_Token": sessionStorage.getItem("Refresh_Token"),
-    }})
+    .post("/user/reissue", null, {
+      headers: {
+        Refresh_Token: sessionStorage.getItem("Refresh_Token"),
+      },
+    })
     .then((res) => {
-      sessionStorage.setItem("Access_Token", res.headers.access_token);
-      return res.headers.access_token;
+      setTimeout(() => {
+        sessionStorage.setItem("Access_Token", res.headers.access_token);
+        return res.headers.access_token;
+      }, 5000);
     })
     .catch((error) => console.error("토큰 리프레시 중 에러" + error));
   return res;
