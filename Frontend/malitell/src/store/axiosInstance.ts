@@ -31,16 +31,17 @@ export const authApi: AxiosInstance = axios.create({
   baseURL: BASE_URL + "/api",
   headers: {
     "Content-type": "application/json",
+    "Access_Token": sessionStorage.getItem("Access_Token");
   },
 });
 
-authApi.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem("Access_Token");
-  if (token) {
-    config.headers["Access_Token"] = token;
-  }
-  return config;
-});
+// authApi.interceptors.request.use((config) => {
+//   const token = sessionStorage.getItem("Access_Token");
+//   if (token) {
+//     config.headers["Access_Token"] = token;
+//   }
+//   return config;
+// });
 
 export const refreshApi: AxiosInstance = axios.create({
   baseURL: BASE_URL + "/api",
